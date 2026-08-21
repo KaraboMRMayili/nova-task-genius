@@ -79,11 +79,11 @@ Match the requested tone precisely and never pad with filler.
 ${SAFETY_CLAUSE}`,
     buildPrompt: (v) => `Write a workplace email.
 
-RECIPIENT CONTEXT: ${v.recipient}
-TONE: ${v.tone}
-LENGTH: ${v.length}
-PRIMARY INTENT: ${v.intent}
-FACTS THAT MUST APPEAR: ${v.details || "none supplied — use placeholders where facts are needed"}
+RECIPIENT CONTEXT: ${v["recipient"]}
+TONE: ${v["tone"]}
+LENGTH: ${v["length"]}
+PRIMARY INTENT: ${v["intent"]}
+FACTS THAT MUST APPEAR: ${v["details"] || "none supplied — use placeholders where facts are needed"}
 
 Steps: 1) identify the single outcome the email must achieve, 2) choose an opening that respects the recipient's seniority, 3) state the ask explicitly, 4) close with a concrete next step and deadline.`,
   },
@@ -120,12 +120,12 @@ If an owner or date is not stated in the notes, write [UNASSIGNED] or [NO DATE] 
 ${SAFETY_CLAUSE}`,
     buildPrompt: (v) => `Summarize the following meeting.
 
-MEETING: ${v.meeting || "[UNTITLED MEETING]"}
-SUMMARY AUDIENCE: ${v.audience}
+MEETING: ${v["meeting"] || "[UNTITLED MEETING]"}
+SUMMARY AUDIENCE: ${v["audience"]}
 
 RAW NOTES:
 """
-${v.notes}
+${v["notes"]}
 """
 
 Extract only what is present in the notes. Distinguish clearly between a decision (already agreed) and an action item (still to do).`,
@@ -169,13 +169,13 @@ Never overfill the day — leave at least 20% buffer and name it explicitly.
 ${SAFETY_CLAUSE}`,
     buildPrompt: (v) => `Build a prioritized schedule.
 
-HORIZON: ${v.horizon}
-CAPACITY: ${v.hours || "[CAPACITY NOT SUPPLIED — assume 6 focused hours per day and say so]"}
-CONSTRAINTS: ${v.constraints || "none supplied"}
+HORIZON: ${v["horizon"]}
+CAPACITY: ${v["hours"] || "[CAPACITY NOT SUPPLIED — assume 6 focused hours per day and say so]"}
+CONSTRAINTS: ${v["constraints"] || "none supplied"}
 
 TASKS:
 """
-${v.tasks}
+${v["tasks"]}
 """
 
 Steps: 1) score each task on impact and urgency, 2) rank them, 3) place deep work in the earliest protected block, 4) batch shallow work, 5) call out anything that cannot realistically fit.`,
@@ -219,13 +219,13 @@ State plainly when a claim is general knowledge rather than sourced from supplie
 ${SAFETY_CLAUSE}`,
     buildPrompt: (v) => `Produce a research brief.
 
-TOPIC: ${v.topic}
-DEPTH: ${v.depth}
-DECISION IT INFORMS: ${v.purpose || "not specified"}
+TOPIC: ${v["topic"]}
+DEPTH: ${v["depth"]}
+DECISION IT INFORMS: ${v["purpose"] || "not specified"}
 
 SOURCE TEXT:
 """
-${v.source || "(none supplied — rely on general knowledge and flag the limitation)"}
+${v["source"] || "(none supplied — rely on general knowledge and flag the limitation)"}
 """
 
 Separate what is directly supported by the source text from your own general knowledge.`,
